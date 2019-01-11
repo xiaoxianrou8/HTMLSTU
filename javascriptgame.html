@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="jquery-3.3.1.js">
+
+    </script>
+  </head>
+  <body>
+    <canvas id="mycanvas" width="800" height="800"><p>jgggggggggggj</p></canvas>
+    <script type="text/javascript">
+      $(document).ready(function()
+      {
+        //获取canvas对象
+        var canvas=document.getElementById("mycanvas");
+        //验证canvas是否有内容，不支持canvas的浏览器会忽略<canvas>让其执行else的内容
+        if(canvas.getContext)
+        {
+          var canvasContext=canvas.getContext("2d");
+          canvasContext.fillStyle="green";
+          //方块数
+          var numBlocks=10;
+          //attr返回属性元素，获取了画布的宽和高
+          var canWidth=$(mycanvas).attr("width");
+          var canHeight=$(mycanvas).attr("height");
+          //设置分块宽高，留下间隙
+          var blockWidth=(canWidth/numBlocks)-2;
+          var blockHeight=(canHeight/numBlocks)-2;
+          //设置初始点
+          var offsetX=0;
+          var offsetY=0;
+          //行块数
+          var colCount=0;
+          //总块数
+          var numTotal=numBlocks*numBlocks;
+          for(i=0;i<numTotal;i++)
+          {
+            //填充色块
+            canvasContext.fillRect(offsetX,offsetY,blockWidth,blockHeight);
+            //向右移动，画色块
+            offsetX=offsetX+blockWidth+2;
+            colCount++;
+            //横向画完画列项
+            if(colCount==numBlocks)
+            {
+              colCount=0;
+              offsetY=offsetY+blockHeight+2;
+              offsetX=0;
+            }
+          }
+          $(mycanvas).click(function(f)
+          {
+            //补充间隙宽度，最终用于定位色块的起点
+            var xSpan=0;
+            var ySpan=0;
+            //确定鼠标点击相对于起点的坐标
+            var x=f.pageX-this.offsetLeft;
+            var y=f.pageY-this.offsetTop;
+            //确定点击的色块行列信息
+            var xBlock=Math.floor((x/blockWidth));
+            var yBlock=Math.floor((y/blockHeight));
+            if(xBlock>0){
+              xSpan=xBlock*2;
+            }
+            if(yBlock>0){
+              ySpan=yBlock*2;
+            }
+            var xPos=(blockWidth*xBlock)+xSpan;
+            var yPos=(blockHeight*yBlock)+ySpan;
+            canvasContext.clearRect(xPos,yPos,blockWidth,blockHeight);
+          }
+          );
+        }
+      });
+    </script>
+  </body>
+</html>

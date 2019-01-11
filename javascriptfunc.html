@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="jquery-3.3.1.js"></script>
+    <style media="screen" type="text/css">
+      .errorCl
+      {
+        background-color:red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="hello">
+      <h1>Hello World</h1>
+    </div>
+
+    <hr style="height:5px">
+    <form id="Upload" action="#" name="myform" method="get">
+      <table>
+        <tr>
+          <td>账户:</td>
+          <td>
+            <input type="text" id="user" name="user" placeholder="用户名">
+          </td>
+        </tr>
+        <tr>
+          <td>密码:</td>
+          <td><input type="password" name="psw" placeholder="输入密码"></td>
+        </tr>
+        <tr span=2>
+          <td>提交:</td>
+          <td><input type="submit" name="sub"></td>
+        </tr>
+      </table>
+
+      <script type="text/javascript">
+        $("#hello").css("backgroundColor","blue")
+        $("#hello").click(function(){
+          $(this).fadeOut(1000);
+        });
+      </script>
+
+      <script type="text/javascript">
+        $("#Upload").submit(function()
+        {
+          if($(user).val()=="zhang")
+          {
+            $(user).removeClass("errorCl");
+            alert("确定提交？");
+          }
+          else {
+            $(user).addClass("errorCl");
+            alert("用户错误");
+            return false;
+          }
+        });
+      </script>
+
+    </form>
+  </body>
+</html>
